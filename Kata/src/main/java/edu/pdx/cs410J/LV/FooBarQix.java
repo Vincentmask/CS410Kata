@@ -1,5 +1,7 @@
 package edu.pdx.cs410J.LV;
 
+import java.io.*;
+import java.util.*;
 /**
  * A class for getting started with a code kata
  * <p>
@@ -9,62 +11,50 @@ package edu.pdx.cs410J.LV;
 public class FooBarQix {
 
     public static void main(String[] args) {
-    /*  int num = valueOf(String.valueOf(str));
-    String ret = "";
-    if(num % 3 == 0)
-      ret += "Foo";
-    if(num % 5 == 0)
-      ret += "Bar";
-    if(num % 7 == 0)
-      ret += "Qix";
-    for(int i = 0; i < str.length(); i++){
-      if(str[i] == 3)
-        ret += "Foo";
-      if(str[i] == 5)
-        ret += "Bar";
-      if(str[i] == 7)
-        ret += "Qix";
-    }
-    System.out.print(ret);
-   */
+        Stack stack = new Stack();
+        for (String arg : args) {
+            if(arg.equals("MAX")){
+                int max;
+                Stack clone = (Stack) stack.clone();
+                Collections.sort(clone);
+                String maxV = clone.get(clone.size()-1).toString();
+                while(!stack.isEmpty()){
+                    stack.pop();
+                }
+                stack.push(maxV);
+            }
+            else if(arg.equals("SQRT")){
+                String a = stack.pop().toString();
+                double b = Double.parseDouble(a);
+                stack.push(Math.sqrt(b));
+            }
+            else if (arg.equals("*") || arg.equals("/") || arg.equals("+") || arg.equals("-")) {
+                String a = stack.pop().toString();
+                double b = Double.parseDouble(a);
 
-        String arg = args[0];
-        char[] arg2 = arg.toCharArray();
-        int num = Integer.parseInt(arg);
-        boolean flag = false;
-        if (num % 3 == 0) {
-            System.out.print("Foo");
-            flag = true;
-        }
-        if (num % 5 == 0) {
-            System.out.print("Bar");
-            flag = true;
-        }
-        if (num % 7 == 0) {
-            System.out.print("Qix");
-            flag = true;
-        }
-        for (int i = 0; i < arg.length(); i++) {
-            if (arg2[i] == '3') {
-                System.out.print("Foo");
-                flag = true;
+                String c = stack.pop().toString();
+                double d = Double.parseDouble(c);
+                switch (arg) {
+                    case "*":
+                        stack.push(d * b);
+                        break;
+                    case "/":
+                        stack.push(d / b);
+                        break;
+                    case "+":
+                        stack.push(d + b);
+                        break;
+                    case "-":
+                        stack.push(d - b);
+                        break;
+                }
             }
-            else if (arg2[i] == '5') {
-                System.out.print("Bar");
-                flag = true;
-            }
-            else if (arg2[i] == '7') {
-                System.out.print("Qix");
-                flag = true;
-            }
-            else if (arg2[i] == '0') {
-                arg2[i] = '*';
-                if(flag == true)
-                    System.out.print("*");
+            else {
+                stack.push(arg);
             }
         }
-        if(flag == false ){
-            System.out.print(arg2);
-        }
+        String str = stack.pop().toString();
+        double result = Double.parseDouble(str);
+        System.out.println("\nThe result is: " + result);
     }
 }
