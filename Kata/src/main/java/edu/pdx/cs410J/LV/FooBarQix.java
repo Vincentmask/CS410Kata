@@ -6,7 +6,7 @@ package edu.pdx.cs410J.LV;
  * Use IntelliJ's "Refactor | Rename..." command to change the name of this
  * class (and its tests).
  */
-public class Kata {
+public class FooBarQix {
 
     public static void main(String[] args) {
     /*  int num = valueOf(String.valueOf(str));
