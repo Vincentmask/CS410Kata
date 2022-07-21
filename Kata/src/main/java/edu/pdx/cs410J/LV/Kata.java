@@ -12,14 +12,17 @@ public class Kata {
 
     public static void main(String[] args) {
         Stack stack = new Stack();
+        int i = 0;
+        int j = 1;
         for (String arg : args) {
             if(arg.equals("MAX")){
-                int max;
                 Stack clone = (Stack) stack.clone();
                 Collections.sort(clone);
-                String maxV = clone.get(clone.size()-1).toString();
-                while(!stack.isEmpty()){
+                String maxV = clone.get(clone.size()-j).toString();
+                j++;
+                while(i!= 0){
                     stack.pop();
+                    i--;
                 }
                 stack.push(maxV);
             }
@@ -51,6 +54,7 @@ public class Kata {
             }
             else {
                 stack.push(arg);
+                i++;
             }
         }
         String str = stack.pop().toString();
